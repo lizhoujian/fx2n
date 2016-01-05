@@ -11,4 +11,5 @@
 <ul>
   <li>code: code.csdn.net/itas109/serialport_itas109</li>
   <li>blog: http://blog.csdn.net/itas109</li>
+  <li>CnComm: http://blog.csdn.net/wujian53</li>
 </ul>

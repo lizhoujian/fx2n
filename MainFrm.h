@@ -17,61 +17,61 @@
 
 class CMainFrame : public CFrameWnd
 {
-	
+    
 protected: // create from serialization only
-	CMainFrame();
-	DECLARE_DYNCREATE(CMainFrame)
+    CMainFrame();
+    DECLARE_DYNCREATE(CMainFrame)
 
 // Attributes
 public:
-	Language m_language;
-	CStatusBar  m_wndStatusBar;
-	BOOL  m_IsNewVertxt;
+    Language m_language;
+    CStatusBar  m_wndStatusBar;
+    BOOL  m_IsNewVertxt;
 // Operations
 public:
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CMainFrame)
-	public:
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-	virtual void ActivateFrame(int nCmdShow = -1);
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CMainFrame)
+    public:
+    virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+    virtual void ActivateFrame(int nCmdShow = -1);
+    //}}AFX_VIRTUAL
 
 // Implementation
 public:
-	virtual ~CMainFrame();
-	BOOL DonwLoadFile(PSTR pURL, LPSTR SaveAsFilePath);
-	void ShowMessage(CString strMsg);
+    virtual ~CMainFrame();
+    BOOL DonwLoadFile(PSTR pURL, LPSTR SaveAsFilePath);
+    void ShowMessage(CString strMsg);
 
 #ifdef _DEBUG
-	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+    virtual void AssertValid() const;
+    virtual void Dump(CDumpContext& dc) const;
 #endif
 
 protected:  // control bar embedded members
-	
-	BOOL m_firstShow;
+    
+    BOOL m_firstShow;
 
-	//thread
-	HANDLE hThread;
-	DWORD ThreadID;
+    //thread
+    HANDLE hThread;
+    DWORD ThreadID;
 
 
 // Generated message map functions
 protected:
-	//{{AFX_MSG(CMainFrame)
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	afx_msg void OnClose();
-	afx_msg void OnEditCommand();
-	afx_msg void OnEditProtocol();
-	afx_msg void OnHelpScript();
-	afx_msg void OnAppSnedmail();
-	afx_msg void OnAppUpgrade();
-	afx_msg void OnAppHome();
-	afx_msg void OnSendFile();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CMainFrame)
+    afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+    afx_msg void OnClose();
+    afx_msg void OnEditCommand();
+    afx_msg void OnEditProtocol();
+    afx_msg void OnHelpScript();
+    afx_msg void OnAppSnedmail();
+    afx_msg void OnAppUpgrade();
+    afx_msg void OnAppHome();
+    afx_msg void OnSendFile();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

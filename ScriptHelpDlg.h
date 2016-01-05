@@ -15,32 +15,32 @@
 class CScriptHelpDlg : public ETSLayoutDialog
 {
 // Construction
-	DECLARE_LAYOUT();
+    DECLARE_LAYOUT();
 public:
-	CScriptHelpDlg(CWnd* pParent = NULL);   // standard constructor
+    CScriptHelpDlg(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CScriptHelpDlg)
-	enum { IDD = IDD_DLGSCRIPTHELP };
-		// NOTE: the ClassWizard will add data members here
-	//}}AFX_DATA
+    //{{AFX_DATA(CScriptHelpDlg)
+    enum { IDD = IDD_DLGSCRIPTHELP };
+        // NOTE: the ClassWizard will add data members here
+    //}}AFX_DATA
 
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CScriptHelpDlg)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CScriptHelpDlg)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
 
-	// Generated message map functions
-	//{{AFX_MSG(CScriptHelpDlg)
-	virtual BOOL OnInitDialog();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CScriptHelpDlg)
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

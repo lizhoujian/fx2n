@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -27,18 +27,18 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -66,64 +66,64 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\MyComm.ico"
-IDR_MYCOMMTYPE          ICON    DISCARDABLE     "res\\MyCommDoc.ico"
-IDI_ICONCLEAR           ICON    DISCARDABLE     "res\\icon1.ico"
-IDI_ICONCALC            ICON    DISCARDABLE     "res\\abc32.ico"
+IDR_MAINFRAME           ICON                    "res\\MyComm.ico"
+IDR_MYCOMMTYPE          ICON                    "res\\MyCommDoc.ico"
+IDI_ICONCLEAR           ICON                    "res\\icon1.ico"
+IDI_ICONCALC            ICON                    "res\\abc32.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
 //
 
-IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+IDR_MAINFRAME MENU 
 BEGIN
     POPUP "文件(&F)"
     BEGIN
-        MENUITEM "新建(&N)\tCtrl+N",            ID_FILE_NEW
-        MENUITEM "打开(&O)...\tCtrl+O",         ID_FILE_OPEN
-        MENUITEM "保存(&S)\tCtrl+S",            ID_FILE_SAVE
-        MENUITEM "另存为(&A)...",               ID_FILE_SAVE_AS
+        MENUITEM "新建(&N)\tCtrl+N",              ID_FILE_NEW
+        MENUITEM "打开(&O)...\tCtrl+O",           ID_FILE_OPEN
+        MENUITEM "保存(&S)\tCtrl+S",              ID_FILE_SAVE
+        MENUITEM "另存为(&A)...",                  ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
-        MENUITEM "最近文件",                    ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "最近文件",                        ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "退出(&X)",                    ID_APP_EXIT
+        MENUITEM "退出(&X)",                      ID_APP_EXIT
     END
     POPUP "设置(&S)"
     BEGIN
-        MENUITEM "状态栏(&S)",                  ID_VIEW_STATUS_BAR
-        MENUITEM "通信指令编辑...",             ID_EDIT_COMMAND
-        MENUITEM "通信协议内容...",             ID_EDIT_PROTOCOL
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
+        MENUITEM "通信指令编辑...",                   ID_EDIT_COMMAND
+        MENUITEM "通信协议内容...",                   ID_EDIT_PROTOCOL
     END
     POPUP "传送(&T)"
     BEGIN
-        MENUITEM "发送文件...",                 ID_SEND_FILE
+        MENUITEM "发送文件...",                     ID_SEND_FILE
     END
     POPUP "帮助(&H)"
     BEGIN
-        MENUITEM "脚本说明...",                 ID_HELP_SCRIPT
-        MENUITEM "在线升级",                    ID_APP_UPGRADE
-        MENUITEM "项目主页",                    ID_APP_HOME
-        MENUITEM "发送邮件给我们...",           ID_APP_SNEDMAIL
-        MENUITEM "关于 LSDComm(&A)...",         ID_APP_ABOUT
+        MENUITEM "脚本说明...",                     ID_HELP_SCRIPT
+        MENUITEM "在线升级",                        ID_APP_UPGRADE
+        MENUITEM "项目主页",                        ID_APP_HOME
+        MENUITEM "发送邮件给我们...",                  ID_APP_SNEDMAIL
+        MENUITEM "关于 LSDComm(&A)...",           ID_APP_ABOUT
     END
 END
 
-IDR_MENU_SNEDKEY MENU DISCARDABLE 
+IDR_MENU_SNEDKEY MENU 
 BEGIN
     POPUP "SendKey"
     BEGIN
-        MENUITEM "无",                          ID_SENDKEY_NONE
+        MENUITEM "无",                           ID_SENDKEY_NONE
         MENUITEM "&Enter",                      ID_SENDKEY_ENTER
         MENUITEM "&Shift+Enter",                ID_SENDKEY_SHIFTENTER
     END
 END
 
-IDR_MENU_CHECK MENU DISCARDABLE 
+IDR_MENU_CHECK MENU 
 BEGIN
     POPUP "Check"
     BEGIN
-        MENUITEM "累加和",                      ID_CHECK_SUM
+        MENUITEM "累加和",                         ID_CHECK_SUM
         MENUITEM "CRC",                         ID_CHECK_CRC
     END
 END
@@ -134,7 +134,7 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+IDR_MAINFRAME ACCELERATORS 
 BEGIN
     "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
     "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
@@ -157,8 +157,8 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 259, 165
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ABOUTBOX DIALOG  0, 0, 259, 165
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "关于 LSDComm"
 FONT 9, "宋体"
 BEGIN
@@ -173,68 +173,53 @@ BEGIN
     LTEXT           "版本",IDC_STATIC_VERSION,110,23,93,8
 END
 
-IDD_MYCOMM_FORM DIALOG DISCARDABLE  0, 0, 385, 300
-STYLE WS_CHILD | WS_BORDER
-FONT 9, "宋体"
+IDD_MYCOMM_FORM DIALOGEX 0, 0, 385, 300
+STYLE DS_SETFONT | WS_CHILD | WS_BORDER
+FONT 9, "宋体", 0, 0, 0x0
 BEGIN
     GROUPBOX        "串口设置",IDC_STATIC1,3,5,94,109
     GROUPBOX        "接收区",IDC_STATIC2,3,132,94,89,BS_LEFT
-    EDITTEXT        IDC_EDRECDATA,100,115,41,108,ES_MULTILINE | ES_NOHIDESEL | 
-                    ES_WANTRETURN | WS_VSCROLL
-    EDITTEXT        IDC_EDSENDDATA,102,232,40,37,ES_MULTILINE | 
-                    ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+    EDITTEXT        IDC_EDRECDATA,103,114,41,108,ES_MULTILINE | ES_NOHIDESEL | ES_WANTRETURN | WS_VSCROLL
+    EDITTEXT        IDC_EDSENDDATA,102,232,40,37,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
     PUSHBUTTON      "发送",IDC_BTSEND,100,280,50,14
     LTEXT           "串 口",IDC_STATIC,9,18,21,8
-    COMBOBOX        IDC_CBCOM,37,15,48,60,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
-                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CBCOM,37,15,48,60,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
     LTEXT           "波特率",IDC_STATIC,9,34,25,8
-    COMBOBOX        IDC_CBBANDRATE,37,31,48,168,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_CBBANDRATE,37,31,48,168,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     LTEXT           "数据位",IDC_STATIC,9,50,25,8
-    COMBOBOX        IDC_CBDATABITS,37,47,48,66,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_CBDATABITS,37,47,48,66,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     LTEXT           "校验位",IDC_STATIC,9,67,25,8
     LTEXT           "停止位",IDC_STATIC,9,82,25,8
-    COMBOBOX        IDC_CBPARITY,37,63,48,89,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_CBSTOPBITS,37,79,48,57,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_CBPARITY,37,63,48,89,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CBSTOPBITS,37,79,48,57,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "打开串口",IDC_BTOPENCOMM,3,117,94,14
     PUSHBUTTON      "高级",IDC_BTADVANCED,50,96,43,14
-    CONTROL         "16进制",IDC_CHREVHEX,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,9,142,36,10
+    CONTROL         "16进制",IDC_CHREVHEX,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,142,36,10
     PUSHBUTTON      "显示协议",IDC_BTVIEWPROTOCOL,6,170,43,14
     PUSHBUTTON      "清除显示",IDC_BTCLEARRECEIVEDATA,50,154,43,14
-    CONTROL         "16进制",IDC_CHSENDHEX,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,5,241,40,10
+    CONTROL         "16进制",IDC_CHSENDHEX,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,241,40,10
     LTEXT           "发送区",IDC_STATIC_SEND,3,228,94,9,SS_SUNKEN
-    EDITTEXT        IDC_EDAUTOSENDTIME,66,254,30,14,ES_AUTOHSCROLL | 
-                    ES_NUMBER
-    CONTROL         "周期发送(ms)",IDC_CHAUTOSEND,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,5,254,59,14
-    COMBOBOX        IDC_CBCOMMAND,165,280,95,161,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDAUTOSENDTIME,66,254,30,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "周期发送(ms)",IDC_CHAUTOSEND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,254,59,14
+    COMBOBOX        IDC_CBCOMMAND,165,280,95,161,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "保存数据",IDC_BTSAVERECDATA,6,154,43,14
     PUSHBUTTON      "停止显示",IDC_BTVIEWRECDATA,50,170,43,14
-    CONTROL         "脚本",IDC_CHSCRIPT,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,46,241,32,10
+    CONTROL         "脚本",IDC_CHSCRIPT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,46,241,32,10
     PUSHBUTTON      "↓",IDC_BTSENDKEY,150,280,11,14
-    EDITTEXT        IDC_EDRECDATAVALUE,100,10,60,75,ES_MULTILINE | 
-                    ES_AUTOHSCROLL | ES_WANTRETURN | NOT WS_VISIBLE | 
-                    WS_VSCROLL | WS_HSCROLL
-    PUSHBUTTON      "显示结果窗",IDC_BTVISIBLEVALUE,6,186,43,14
+    EDITTEXT        IDC_EDRECDATAVALUE,105,12,60,132,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    PUSHBUTTON      "关闭结果窗",IDC_BTVISIBLEVALUE,6,186,43,14
     PUSHBUTTON      "",IDC_BTCLEARRXTX,365,280,14,14,BS_ICON
     PUSHBUTTON      "←",IDC_BTSENDUP,5,270,15,11
     PUSHBUTTON      "→",IDC_BTSENDDOWN,45,270,15,11
     PUSHBUTTON      "清空",IDC_BTSENDCLEAR,20,270,24,11
-    PUSHBUTTON      "Calc",IDC_BTCALC,350,280,14,14,BS_ICON | BS_CENTER | 
-                    BS_VCENTER
+    PUSHBUTTON      "Calc",IDC_BTCALC,350,280,14,14,BS_ICON | BS_CENTER | BS_VCENTER
     PUSHBUTTON      "校验和",IDC_BTCHECKSUM,6,203,75,14
     PUSHBUTTON      "↓",IDC_BTCHECKDATA,81,203,11,14
+    PUSHBUTTON      "fxTest",IDC_BTFXTEST,295,281,50,14
 END
 
-IDD_DLGCOMMAND DIALOG DISCARDABLE  0, 0, 325, 368
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLGCOMMAND DIALOG  0, 0, 325, 368
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "通信指令编辑"
 FONT 9, "宋体"
 BEGIN
@@ -300,94 +285,54 @@ BEGIN
     EDITTEXT        IDC_EDNAME_20,17,326,43,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDCOMMAND_20,64,326,178,14,ES_AUTOHSCROLL
     LTEXT           "20",IDC_STATIC,8,329,8,8
-    CONTROL         "16进制",IDC_CHHEX_1,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,22,35,10
-    CONTROL         "16进制",IDC_CHHEX_2,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,38,35,10
-    CONTROL         "16进制",IDC_CHHEX_3,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,55,35,10
-    CONTROL         "16进制",IDC_CHHEX_4,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,70,35,10
-    CONTROL         "16进制",IDC_CHHEX_5,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,86,35,10
-    CONTROL         "16进制",IDC_CHHEX_6,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,102,35,10
-    CONTROL         "16进制",IDC_CHHEX_7,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,118,35,10
-    CONTROL         "16进制",IDC_CHHEX_8,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,134,35,10
-    CONTROL         "16进制",IDC_CHHEX_9,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,150,35,10
-    CONTROL         "16进制",IDC_CHHEX_10,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,166,35,10
-    CONTROL         "16进制",IDC_CHHEX_11,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,182,35,10
-    CONTROL         "16进制",IDC_CHHEX_12,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,198,35,10
-    CONTROL         "16进制",IDC_CHHEX_13,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,214,35,10
-    CONTROL         "16进制",IDC_CHHEX_14,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,230,35,10
-    CONTROL         "16进制",IDC_CHHEX_15,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,246,35,10
-    CONTROL         "16进制",IDC_CHHEX_16,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,262,35,10
-    CONTROL         "16进制",IDC_CHHEX_17,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,278,35,10
-    CONTROL         "16进制",IDC_CHHEX_18,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,294,35,10
-    CONTROL         "16进制",IDC_CHHEX_19,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,310,35,10
-    CONTROL         "16进制",IDC_CHHEX_20,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,246,327,35,10
+    CONTROL         "16进制",IDC_CHHEX_1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,22,35,10
+    CONTROL         "16进制",IDC_CHHEX_2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,38,35,10
+    CONTROL         "16进制",IDC_CHHEX_3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,55,35,10
+    CONTROL         "16进制",IDC_CHHEX_4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,70,35,10
+    CONTROL         "16进制",IDC_CHHEX_5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,86,35,10
+    CONTROL         "16进制",IDC_CHHEX_6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,102,35,10
+    CONTROL         "16进制",IDC_CHHEX_7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,118,35,10
+    CONTROL         "16进制",IDC_CHHEX_8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,134,35,10
+    CONTROL         "16进制",IDC_CHHEX_9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,150,35,10
+    CONTROL         "16进制",IDC_CHHEX_10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,166,35,10
+    CONTROL         "16进制",IDC_CHHEX_11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,182,35,10
+    CONTROL         "16进制",IDC_CHHEX_12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,198,35,10
+    CONTROL         "16进制",IDC_CHHEX_13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,214,35,10
+    CONTROL         "16进制",IDC_CHHEX_14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,230,35,10
+    CONTROL         "16进制",IDC_CHHEX_15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,246,35,10
+    CONTROL         "16进制",IDC_CHHEX_16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,262,35,10
+    CONTROL         "16进制",IDC_CHHEX_17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,278,35,10
+    CONTROL         "16进制",IDC_CHHEX_18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,294,35,10
+    CONTROL         "16进制",IDC_CHHEX_19,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,310,35,10
+    CONTROL         "16进制",IDC_CHHEX_20,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,327,35,10
     LTEXT           "名称",IDC_STATIC,25,8,17,8
     LTEXT           "命令指令",IDC_STATIC,125,8,33,8
-    CONTROL         "脚本",IDC_CHSCRIPT_1,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,22,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_2,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,38,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_3,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,55,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_4,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,70,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_5,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,86,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_6,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,102,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_7,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,118,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_8,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,134,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_9,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,150,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_10,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,166,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_11,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,182,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_12,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,198,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_13,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,214,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_14,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,230,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_15,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,246,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_16,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,262,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_17,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,278,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_18,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,294,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_19,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,310,27,10
-    CONTROL         "脚本",IDC_CHSCRIPT_20,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,285,327,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,22,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,38,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,55,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,70,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,86,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,102,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,118,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,134,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,150,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,166,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,182,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,198,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,214,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,230,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,246,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,262,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,278,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,294,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_19,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,310,27,10
+    CONTROL         "脚本",IDC_CHSCRIPT_20,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,285,327,27,10
     LTEXT           "选项",IDC_STATIC,267,8,17,8
     PUSHBUTTON      "脚本帮助",IDC_BTSCRIPTHELP,9,347,50,14
 END
 
-IDD_DLGADVANCED DIALOG DISCARDABLE  0, 0, 181, 170
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLGADVANCED DIALOG  0, 0, 181, 170
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "高级设置"
 FONT 9, "宋体"
 BEGIN
@@ -398,61 +343,54 @@ BEGIN
     LTEXT           "读时间系数:",IDC_STATIC,17,40,45,8
     LTEXT           "读时间常量:",IDC_STATIC,17,56,45,8
     EDITTEXT        IDC_EDREADINTER,66,20,76,14,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDREADTOTALMUL,66,36,76,14,ES_AUTOHSCROLL | 
-                    ES_NUMBER
-    EDITTEXT        IDC_EDREATOTALCONST,66,52,76,14,ES_AUTOHSCROLL | 
-                    ES_NUMBER
+    EDITTEXT        IDC_EDREADTOTALMUL,66,36,76,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDREATOTALCONST,66,52,76,14,ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "ms",IDC_STATIC,146,23,9,8
     LTEXT           "ms",IDC_STATIC,146,39,9,8
     LTEXT           "ms",IDC_STATIC,146,55,9,8
     GROUPBOX        "写超时设置",IDC_STATIC,7,80,162,55
     LTEXT           "写时间系数:",IDC_STATIC,17,97,45,8
     LTEXT           "写时间常量:",IDC_STATIC,17,113,45,8
-    EDITTEXT        IDC_EDWRITETOTALMUL,66,93,76,14,ES_AUTOHSCROLL | 
-                    ES_NUMBER
-    EDITTEXT        IDC_EDWRITETOTALCONST,66,109,76,14,ES_AUTOHSCROLL | 
-                    ES_NUMBER
+    EDITTEXT        IDC_EDWRITETOTALMUL,66,93,76,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDWRITETOTALCONST,66,109,76,14,ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "ms",IDC_STATIC,146,97,9,8
     LTEXT           "ms",IDC_STATIC,146,113,9,8
     PUSHBUTTON      "默认值",IDC_BTDEFAULT,7,149,50,14
 END
 
-IDD_DLGPROTOCOL DIALOG DISCARDABLE  0, 0, 316, 275
-STYLE WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+IDD_DLGPROTOCOL DIALOG  0, 0, 316, 275
+STYLE DS_SETFONT | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "通信协议"
 FONT 9, "宋体"
 BEGIN
     PUSHBUTTON      "确定(&O)",IDOK,193,254,50,14
     PUSHBUTTON      "取消(&C)",IDCANCEL,247,254,50,14
-    EDITTEXT        IDC_EDIT,13,13,288,236,ES_MULTILINE | ES_AUTOHSCROLL | 
-                    ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    EDITTEXT        IDC_EDIT,13,13,288,236,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
 END
 
-IDD_DLGSCRIPTHELP DIALOG DISCARDABLE  0, 0, 268, 251
-STYLE WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+IDD_DLGSCRIPTHELP DIALOG  0, 0, 268, 251
+STYLE DS_SETFONT | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "脚本说明"
 FONT 9, "宋体"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,154,230,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,211,230,50,14
-    EDITTEXT        IDC_EDIT1,11,10,244,210,ES_MULTILINE | ES_AUTOHSCROLL | 
-                    ES_READONLY | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    EDITTEXT        IDC_EDIT1,11,10,244,210,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
 END
 
-IDD_DLGUPGRADE DIALOG DISCARDABLE  0, 0, 272, 225
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLGUPGRADE DIALOG  0, 0, 272, 225
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "在线升级"
 FONT 9, "宋体"
 BEGIN
     DEFPUSHBUTTON   "确定(&O)",IDOK,158,204,50,14
     PUSHBUTTON      "取消(&C)",IDCANCEL,215,204,50,14
     LTEXT           "升级后将自动关闭并重新启动。",IDC_STATIC1,9,10,247,8
-    EDITTEXT        IDC_EDDATE,7,25,258,168,ES_MULTILINE | ES_AUTOHSCROLL | 
-                    ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    EDITTEXT        IDC_EDDATE,7,25,258,168,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
 
-IDD_DLGSENDFILE DIALOG DISCARDABLE  0, 0, 237, 165
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLGSENDFILE DIALOG  0, 0, 237, 165
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "发送文件"
 FONT 9, "宋体"
 BEGIN
@@ -463,18 +401,13 @@ BEGIN
     LTEXT           "文件名:",IDC_STATIC,15,80,29,8
     EDITTEXT        IDC_EDFILENAME,15,92,208,14,ES_AUTOHSCROLL
     PUSHBUTTON      "浏览...",IDC_BTSELECTFILE,15,110,50,14
-    CONTROL         "Xmodem",IDC_RD_XMODEM,"Button",BS_AUTORADIOBUTTON | 
-                    WS_GROUP,16,24,40,10
-    CONTROL         "Ymodem",IDC_RD_YMODEM,"Button",BS_AUTORADIOBUTTON,79,24,
-                    40,10
-    CONTROL         "Zmodem",IDC_RD_ZMODEM,"Button",BS_AUTORADIOBUTTON,138,
-                    24,40,10
-    CONTROL         "1K Xmodem ",IDC_RD_1KXMODEM,"Button",BS_AUTORADIOBUTTON,
-                    16,37,56,10
+    CONTROL         "Xmodem",IDC_RD_XMODEM,"Button",BS_AUTORADIOBUTTON | WS_GROUP,16,24,40,10
+    CONTROL         "Ymodem",IDC_RD_YMODEM,"Button",BS_AUTORADIOBUTTON,79,24,40,10
+    CONTROL         "Zmodem",IDC_RD_ZMODEM,"Button",BS_AUTORADIOBUTTON,138,24,40,10
+    CONTROL         "1K Xmodem ",IDC_RD_1KXMODEM,"Button",BS_AUTORADIOBUTTON,16,37,56,10
 END
 
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -497,18 +430,14 @@ BEGIN
     BEGIN
         BLOCK "080404b0"
         BEGIN
-            VALUE "Comments", "\0"
-            VALUE "CompanyName", "HTTP://lsdcomm.googlecode.com\0"
-            VALUE "FileDescription", "LSDComm Microsoft 基础类应用程序\0"
-            VALUE "FileVersion", "1, 2, 0, 0\0"
-            VALUE "InternalName", "LSDComm\0"
-            VALUE "LegalCopyright", "版权所有 (C) 2008\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "LSDComm.EXE\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "LSDComm 应用程序\0"
-            VALUE "ProductVersion", "1, 2, 0, 0\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "CompanyName", "HTTP://lsdcomm.googlecode.com"
+            VALUE "FileDescription", "LSDComm Microsoft 基础类应用程序"
+            VALUE "FileVersion", "1, 2, 0, 0"
+            VALUE "InternalName", "LSDComm"
+            VALUE "LegalCopyright", "版权所有 (C) 2008"
+            VALUE "OriginalFilename", "LSDComm.EXE"
+            VALUE "ProductName", "LSDComm 应用程序"
+            VALUE "ProductVersion", "1, 2, 0, 0"
         END
     END
     BLOCK "VarFileInfo"
@@ -517,8 +446,6 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -526,7 +453,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -541,7 +468,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 378
         TOPMARGIN, 5
-        BOTTOMMARGIN, 293
+        BOTTOMMARGIN, 295
     END
 
     IDD_DLGCOMMAND, DIALOG
@@ -669,26 +596,26 @@ END
 // Bitmap
 //
 
-IDB_BITMAPCLOSECOM      BITMAP  DISCARDABLE     "res\\bitmap1.bmp"
-IDB_BITMAPOPENCOM       BITMAP  DISCARDABLE     "res\\bmp00001.bmp"
+IDB_BITMAPCLOSECOM      BITMAP                  "res\\bitmap1.bmp"
+IDB_BITMAPOPENCOM       BITMAP                  "res\\bmp00001.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDR_MAINFRAME           "LSDComm\n\nLSDComm\nLSDComm 文件 (*.comm)\n.comm\nLSDComm.Document\nLSDComm Document"
 END
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "LSDComm"
     AFX_IDS_IDLEMESSAGE     "就绪"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_INDICATOR_EXT        "扩展名"
     ID_INDICATOR_CAPS       "大写"
@@ -698,7 +625,7 @@ BEGIN
     ID_INDICATOR_REC        "记录"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_FILE_NEW             "建立新文档\n新建"
     ID_FILE_OPEN            "打开一个现有文档\n打开"
@@ -707,13 +634,13 @@ BEGIN
     ID_FILE_SAVE_AS         "将活动文档以一个新文件名保存\n另存为"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_APP_ABOUT            "显示程序信息，版本号和版权\n关于"
     ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_FILE_MRU_FILE1       "打开该文档"
     ID_FILE_MRU_FILE2       "打开该文档"
@@ -733,18 +660,18 @@ BEGIN
     ID_FILE_MRU_FILE16      "打开该文档"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
     ID_PREV_PANE            "切换回前一个窗格\n前一窗格"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_WINDOW_SPLIT         "将活动的窗口分隔成窗格\n分隔"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_EDIT_CLEAR           "删除被选对象\n删除"
     ID_EDIT_CLEAR_ALL       "全部删除\n全部删除"
@@ -759,12 +686,12 @@ BEGIN
     ID_EDIT_REDO            "重新执行先前已撤消的操作\n重新执行"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n显隐状态栏"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_SCSIZE          "改变窗口大小"
     AFX_IDS_SCMOVE          "改变窗口位置"
@@ -775,13 +702,13 @@ BEGIN
     AFX_IDS_SCCLOSE         "关闭活动的窗口并提示保存所有文档"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_SCRESTORE       "把窗口恢复到正常大小"
     AFX_IDS_SCTASKLIST      "激活任务表"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_EDIT_COMMAND         "按通信的协议编辑命令指令"
     IDC_EDITPROTOCOL        "记录通信协议以便随时查看"
@@ -789,7 +716,7 @@ BEGIN
     ID_HELP_SCRIPT          "说明脚本的语法。"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_SENDKEY_NONE         "无快捷键，必按SEND按键才发送。"
     ID_SENDKEY_ENTER        "按下回车，发送指令。"
@@ -800,7 +727,7 @@ BEGIN
     ID_CHECK_CRC            "循环冗余校验"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_STATUSBAR_TX         "TX:"
     ID_STATUSBAR_RX         "RX:"

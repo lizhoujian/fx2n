@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by MyComm.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -32,6 +32,7 @@
 #define IDC_CBPARITY                    1014
 #define IDC_CBSTOPBITS                  1015
 #define IDC_BTOPENCOMM                  1016
+#define IDC_BTFXTEST                    1017
 #define IDC_EDNAME_1                    1020
 #define IDC_EDNAME_2                    1021
 #define IDC_EDCOMMAND_1                 1022
@@ -143,6 +144,8 @@
 #define IDC_BTSENDKEY                   1113
 #define IDC_EDRECDATAVALUE              1114
 #define IDC_BTVISIBLEVALUE              1115
+#define IDC_EDRECDATAVALUE2             1116
+#define IDC_SENTDATA                    1116
 #define IDC_BTSENDUP                    1117
 #define IDC_BTSENDDOWN                  1118
 #define IDC_BTSENDCLEAR                 1119

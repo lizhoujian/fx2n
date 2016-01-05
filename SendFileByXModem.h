@@ -14,31 +14,31 @@ class CSendFileByXModem : public CDialog
 {
 // Construction
 public:
-	CSendFileByXModem(CWnd* pParent = NULL);   // standard constructor
+    CSendFileByXModem(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CSendFileByXModem)
-	enum { IDD = IDD_DLGSENDFILE };
-	CString	m_SendFileName;
-	int		m_ModemType;
-	//}}AFX_DATA
+    //{{AFX_DATA(CSendFileByXModem)
+    enum { IDD = IDD_DLGSENDFILE };
+    CString    m_SendFileName;
+    int        m_ModemType;
+    //}}AFX_DATA
 
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CSendFileByXModem)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CSendFileByXModem)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
 
-	// Generated message map functions
-	//{{AFX_MSG(CSendFileByXModem)
-	afx_msg void OnBtselectfile();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CSendFileByXModem)
+    afx_msg void OnBtselectfile();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

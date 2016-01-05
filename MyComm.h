@@ -9,7 +9,7 @@
 #endif // _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+    #error include 'stdafx.h' before including this file for PCH
 #endif
 
 #include "resource.h"       // main symbols
@@ -28,30 +28,30 @@ enum Language { LACHINA = 0, LACHINAS ,LAENGLISH};
 class CMyCommApp : public CWinApp
 {
 public:
-	CMyCommApp();
-	
+    CMyCommApp();
+    
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CMyCommApp)
-	public:
-	virtual BOOL InitInstance();
-	virtual int ExitInstance();
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CMyCommApp)
+    public:
+    virtual BOOL InitInstance();
+    virtual int ExitInstance();
+    //}}AFX_VIRTUAL
 
 // Implementation
-	//{{AFX_MSG(CMyCommApp)
-	afx_msg void OnAppAbout();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CMyCommApp)
+    afx_msg void OnAppAbout();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 public:
-	SendKeyStyle       m_SendkeyType;  
-	CString            m_ScriptHelp;
-	CString            m_AppDir;
-	CString            m_AppVersion;
-	CString            m_downfileexefilename;
+    SendKeyStyle       m_SendkeyType;  
+    CString            m_ScriptHelp;
+    CString            m_AppDir;
+    CString            m_AppVersion;
+    CString            m_downfileexefilename;
 public:
-	void DoSetStautsBarText(UINT index,CString Value);
+    void DoSetStautsBarText(UINT index,CString Value);
 
 
 

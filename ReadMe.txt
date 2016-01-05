@@ -28,7 +28,7 @@ MyComm.rc
     This is a listing of all of the Microsoft Windows resources that the
     program uses.  It includes the icons, bitmaps, and cursors that are stored
     in the RES subdirectory.  This file can be directly edited in Microsoft
-	Visual C++.
+    Visual C++.
 
 MyComm.clw
     This file contains information used by ClassWizard to edit existing
@@ -42,8 +42,8 @@ res\MyComm.ico
 
 res\MyComm.rc2
     This file contains resources that are not edited by Microsoft 
-	Visual C++.  You should place all resources not editable by
-	the resource editor in this file.
+    Visual C++.  You should place all resources not editable by
+    the resource editor in this file.
 
 MyComm.reg
     This is an example .REG file that shows you the kind of registration

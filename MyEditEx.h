@@ -14,7 +14,7 @@ class CMyEditEx : public CEdit
 {
 // Construction
 public:
-	CMyEditEx();
+    CMyEditEx();
 
 // Attributes
 public:
@@ -23,20 +23,20 @@ public:
 public:
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CMyEditEx)
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CMyEditEx)
+    //}}AFX_VIRTUAL
 
 // Implementation
 public:
-	virtual ~CMyEditEx();
+    virtual ~CMyEditEx();
 
-	// Generated message map functions
+    // Generated message map functions
 protected:
-	//{{AFX_MSG(CMyEditEx)
-	//}}AFX_MSG
+    //{{AFX_MSG(CMyEditEx)
+    //}}AFX_MSG
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

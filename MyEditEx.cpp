@@ -26,8 +26,8 @@ CMyEditEx::~CMyEditEx()
 
 
 BEGIN_MESSAGE_MAP(CMyEditEx, CEdit)
-	//{{AFX_MSG_MAP(CMyEditEx)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CMyEditEx)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

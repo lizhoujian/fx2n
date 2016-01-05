@@ -16,33 +16,33 @@ class CUpgradeDlg : public ETSLayoutDialog
 // Construction
    DECLARE_LAYOUT();
 public:
-	CUpgradeDlg(CWnd* pParent = NULL);   // standard constructor
+    CUpgradeDlg(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CUpgradeDlg)
-	enum { IDD = IDD_DLGUPGRADE };
-	CString	m_strData;
-	//}}AFX_DATA
+    //{{AFX_DATA(CUpgradeDlg)
+    enum { IDD = IDD_DLGUPGRADE };
+    CString    m_strData;
+    //}}AFX_DATA
 
-	CString m_StrLocalfile;
-	CString m_strdownfile;
-	BOOL m_IsUpgrade;
+    CString m_StrLocalfile;
+    CString m_strdownfile;
+    BOOL m_IsUpgrade;
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CUpgradeDlg)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CUpgradeDlg)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
 
-	// Generated message map functions
-	//{{AFX_MSG(CUpgradeDlg)
-	virtual void OnOK();
-	virtual BOOL OnInitDialog();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CUpgradeDlg)
+    virtual void OnOK();
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -17,26 +17,26 @@ static char THIS_FILE[] = __FILE__;
 
 
 CUpgradeDlg::CUpgradeDlg(CWnd* pParent /*=NULL*/)
-	: ETSLayoutDialog(CUpgradeDlg::IDD, pParent)
+    : ETSLayoutDialog(CUpgradeDlg::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CUpgradeDlg)
-	m_strData = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CUpgradeDlg)
+    m_strData = _T("");
+    //}}AFX_DATA_INIT
 }
 
 
 void CUpgradeDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CUpgradeDlg)
-	DDX_Text(pDX, IDC_EDDATE, m_strData);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CUpgradeDlg)
+    DDX_Text(pDX, IDC_EDDATE, m_strData);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CUpgradeDlg, CDialog)
-	//{{AFX_MSG_MAP(CUpgradeDlg)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CUpgradeDlg)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -44,42 +44,42 @@ END_MESSAGE_MAP()
 
 void CUpgradeDlg::OnOK() 
 {
-	// TODO: Add extra validation here
-	if (!m_IsUpgrade) {
-		CDialog::OnOK();
-		return;
-	};
-	
-	char s[256],s2[256];
-	_tcscpy(s,m_StrLocalfile.GetBuffer(m_StrLocalfile.GetLength())) ;
-	_tcscpy(s2,m_strdownfile.GetBuffer(m_strdownfile.GetLength())) ;
-	CMainFrame * myMain = (CMainFrame *)AfxGetMainWnd();
-	if(!myMain->DonwLoadFile(s2,s))
-	{
-		AfxMessageBox(_T("无法升级。"));
-		return;
-	}
-	else{
-		CDialog::OnOK();
-	}
-	
+    // TODO: Add extra validation here
+    if (!m_IsUpgrade) {
+        CDialog::OnOK();
+        return;
+    };
+    
+    char s[256],s2[256];
+    _tcscpy(s,m_StrLocalfile.GetBuffer(m_StrLocalfile.GetLength())) ;
+    _tcscpy(s2,m_strdownfile.GetBuffer(m_strdownfile.GetLength())) ;
+    CMainFrame * myMain = (CMainFrame *)AfxGetMainWnd();
+    if(!myMain->DonwLoadFile(s2,s))
+    {
+        AfxMessageBox(_T("无法升级。"));
+        return;
+    }
+    else{
+        CDialog::OnOK();
+    }
+    
 }
 
 BOOL CUpgradeDlg::OnInitDialog() 
 {
-	CDialog::OnInitDialog();
-	
-	// TODO: Add extra initialization here
-		CreateRoot(VERTICAL)
-		<< item(IDC_STATIC1,NORESIZE)
-		<< item (IDC_EDDATE)
-		<<	( pane(HORIZONTAL, ABSOLUTE_VERT )
-			<< itemGrowing (HORIZONTAL) 
-			<< item( IDOK, NORESIZE)
-			<< item( IDCANCEL, NORESIZE )
-		);
-	UpdateLayout();
-	
-	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+    CDialog::OnInitDialog();
+    
+    // TODO: Add extra initialization here
+        CreateRoot(VERTICAL)
+        << item(IDC_STATIC1,NORESIZE)
+        << item (IDC_EDDATE)
+        <<    ( pane(HORIZONTAL, ABSOLUTE_VERT )
+            << itemGrowing (HORIZONTAL) 
+            << item( IDOK, NORESIZE)
+            << item( IDCANCEL, NORESIZE )
+        );
+    UpdateLayout();
+    
+    return TRUE;  // return TRUE unless you set the focus to a control
+                  // EXCEPTION: OCX Property Pages should return FALSE
 }

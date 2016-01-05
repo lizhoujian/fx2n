@@ -555,6 +555,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\user_fx.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -628,6 +632,10 @@
 				RelativePath="UpgradeDlg.h"
 				>
 			</File>
+			<File
+				RelativePath=".\user_fx.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -684,5 +692,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="MyComm.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

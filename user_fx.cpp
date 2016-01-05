@@ -9,6 +9,7 @@
 #include "MyCommDoc.h"
 #include "MyCommView.h"
 
+#ifdef _WIN32
 typedef void * xQueueHandle;
 typedef void * xSemaphoreHandle;
 typedef unsigned int portTickType;
@@ -57,6 +58,9 @@ static void uart_set_recv_cb(cb myCb)
 {
 
 }
+#else
+#define TRACE printf
+#endif
 
 #include "user_fx.h"
 
@@ -121,7 +125,7 @@ static void uart_cb(u8 c)
         p->data[p->index++] = c;
         parse_buf(p, p->index);
     } else {
-        printf("insert char overflow or not init c=%c???\n", c);
+        TRACE("insert char overflow or not init c=%c???\n", c);
     }
 
     xSemaphoreGiveFromISR(uart_queue_recv, NULL);
@@ -184,7 +188,7 @@ static void free_recv_buff(void)
         p->len = 0;
         free(p->data);
         p->data = NULL;
-        printf("free last recv buff.\n");
+        TRACE("free last recv buff.\n");
     }
     xSemaphoreGive(uart_queue_recv);
 }
@@ -215,12 +219,14 @@ static bool wait_recv_done(u16 miliseconds)
         miliseconds += portTICK_RATE_MS;
     }
 
+#ifdef _WIN32
     Sleep(100);
+#endif
     xQueueReceive(uart_queue_recv, (void *)&e, (portTickType)(miliseconds / portTICK_RATE_MS));
     if (e.event = UART_EVENT_DONE) {
         return true;
     } else {
-        printf("wait recv error(timeout?), event = %d\n", e.event);
+        TRACE("wait recv error(timeout?), event = %d\n", e.event);
         return false;
     }
 }
@@ -285,10 +291,10 @@ static bool parse_response_data(u8 *out, u16 len)
             fx_ascii_to_hex(&p->data[0], out, p->len - 4);
             ret = true;
         } else {
-            printf("response data check sum error.\n");
+            TRACE("response data check sum error.\n");
         }
     } else {
-        printf("parse response data invalid.\n");
+        TRACE("parse response data invalid.\n");
     }
 
     xSemaphoreGive(uart_queue_recv);
@@ -311,10 +317,10 @@ void fx_init(void)
             uart_set_recv_cb(uart_cb);
         } else {
             vQueueDelete(uart_queue_recv);
-            printf("create recv_buf_mutex failed.\n");
+            TRACE("create recv_buf_mutex failed.\n");
         }
     } else {
-        printf("create uart_queue_recv failed.\n");
+        TRACE("create uart_queue_recv failed.\n");
     }
 }
 
@@ -371,7 +377,7 @@ static register_t *find_registers(u8 addr_type)
         if (addr_type == registers[i].type)
             return &registers[i];
     }
-    printf("not found register type.");
+    TRACE("not found register type.");
     return NULL;
 }
 

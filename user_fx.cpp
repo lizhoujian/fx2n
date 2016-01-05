@@ -9,7 +9,11 @@
 #include "MyCommDoc.h"
 #include "MyCommView.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
+#define __WINDOWS__
+#endif
+
+#ifdef __WINDOWS__
 typedef void * xQueueHandle;
 typedef void * xSemaphoreHandle;
 typedef unsigned int portTickType;
@@ -188,7 +192,7 @@ static void free_recv_buff(void)
         p->len = 0;
         free(p->data);
         p->data = NULL;
-        TRACE("free last recv buff.\n");
+        //TRACE("free last recv buff.\n");
     }
     xSemaphoreGive(uart_queue_recv);
 }
@@ -213,22 +217,32 @@ static bool alloc_recv_buff(u16 len)
 
 static bool wait_recv_done(u16 miliseconds)
 {
+    bool ret = false;
+    int i;
+    uart_buf_t *p = &uart_recv_buf;
     uart_event_t e = {0,};
 
     if ((miliseconds % (portTICK_RATE_MS)) > 0) {
         miliseconds += portTICK_RATE_MS;
     }
 
-#ifdef _WIN32
+#ifdef __WINDOWS__
     Sleep(100);
-#endif
+    ret = true;
+#else
     xQueueReceive(uart_queue_recv, (void *)&e, (portTickType)(miliseconds / portTICK_RATE_MS));
-    if (e.event = UART_EVENT_DONE) {
-        return true;
+    if (e.event == UART_EVENT_DONE) {
+        ret = true;
     } else {
         TRACE("wait recv error(timeout?), event = %d\n", e.event);
-        return false;
+        ret = false;
     }
+#endif
+    for (i = 0; i < p->len; i++) {
+        TRACE("%02x ", p->data[i]);
+    }
+    TRACE("\r\n");
+    return ret;
 }
 
 static bool is_ack(void)
@@ -285,7 +299,7 @@ static bool parse_response_data(u8 *out, u16 len)
     xSemaphoreTake(uart_queue_recv, portMAX_DELAY);
 
     if ((p->index == p->len) && p->data[0] == STX && (p->index > 3 && p->data[p->index - 1 - 2] == ETX)) {
-        sum = fx_check_sum(&p->data[0], p->len - 4);
+        sum = fx_check_sum(&p->data[0], p->len - 3);
         recv_sum = (u8)to_hex_byte(&p->data[p->index - 1 - 1]);
         if (sum == recv_sum) {
             fx_ascii_to_hex(&p->data[0], out, p->len - 4);
@@ -449,6 +463,43 @@ static void free_request(u8 *data)
     }
 }
 
+#ifdef __WINDOWS__
+static UINT thread_ack(LPVOID param)
+{
+    uart_on_recv_char(ACK);
+    return 0;
+}
+static UINT thread_read(LPVOID param)
+{
+    u16 rlen, len = (u16)param;
+    u8 *buf, sum;
+    int i, r;
+
+    srand(time(NULL));
+
+    rlen = 1 + len * 2 + 1 + 2;
+    buf = (u8*)malloc(rlen);
+    if (buf) {
+        memset(buf, 0, rlen);
+        buf[0] = STX;
+        for (i = 0; i < len * 2; i++) {
+            r = rand() % 40;
+            buf[i + 1] = (u8)r;
+        }
+        buf[rlen - 1 - 2] = ETX;
+        sum = fx_check_sum(&buf[0], rlen - 3 /* - STX - CHECKSUM */);
+        to_ascii(sum, &buf[rlen - 1 - 1]);
+
+        for (i = 0; i < rlen; i++) {
+            uart_on_recv_char(buf[i]);
+        }
+
+        free(buf);
+    }
+    return 0;
+}
+#endif
+
 bool fx_enquiry(void)
 {
     bool ret = false;
@@ -456,6 +507,9 @@ bool fx_enquiry(void)
 
     create_response(cmd, 0);
     uart_send(&cmd, 1);
+#ifdef __WINDOWS__
+    AfxBeginThread(thread_ack, NULL);
+#endif
     ret = wait_response(WAIT_RECV_TIMEOUT) && is_ack();
     free_response();
 
@@ -475,6 +529,9 @@ static bool fx_force_onoff(u8 addr_type, u16 addr, u8 cmd)
             if ((rlen = create_request(r, cmd, addr, NULL, 0, &req)) > 0) {
                 create_response(cmd, 0);
                 send_request(req, rlen);
+#ifdef __WINDOWS__
+                AfxBeginThread(thread_ack, NULL);
+#endif
                 free_request(req);
                 ret = wait_response(WAIT_RECV_TIMEOUT) && is_ack();
                 free_response();
@@ -508,6 +565,9 @@ bool fx_read(u8 addr_type, u16 addr, u8 *out, u16 len)
             if ((rlen = create_request(r, ACTION_READ, addr, NULL, 0, &req)) > 0) {
                 create_response(ACTION_READ, len);
                 send_request(req, rlen);
+#ifdef __WINDOWS__
+                AfxBeginThread(thread_read, (LPVOID)len);
+#endif
                 free_request(req);
                 ret = wait_response(WAIT_RECV_TIMEOUT) && is_stx();
                 if (ret) {
@@ -534,6 +594,9 @@ bool fx_write(u8 addr_type, u16 addr, u8 *data, u16 len)
             if ((rlen = create_request(r, ACTION_WRITE, addr, data, len, &req)) > 0) {
                 create_response(ACTION_WRITE, 0);
                 send_request(req, rlen);
+#ifdef __WINDOWS__
+                AfxBeginThread(thread_ack, NULL);
+#endif
                 free_request(req);
                 ret = wait_response(WAIT_RECV_TIMEOUT) && is_ack();
                 free_response();

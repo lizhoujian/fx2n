@@ -1248,5 +1248,6 @@ void CMyCommView::OnBnClickedBtfxtest()
     fx_write(REG_Y, 100, bytes, 2);
     appendSentLR();
     fx_read(REG_Y, 100, bytes, 2);
+    TRACE("read bytes is %02x %02x\n", bytes[0], bytes[1]);
     appendSentLR();
 }

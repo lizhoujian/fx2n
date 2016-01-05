@@ -498,11 +498,9 @@ void CMyCommView::OnBtSend()
             else{
                 if ((myc != '\n') && (myc != '\r')) {mycommand += myc;}
             }
-            
-        }
-             
+        } 
     }
-    else if(m_ctrlSendHex.GetCheck())
+    else if (m_ctrlSendHex.GetCheck())
     {
         char data[512];
         int len=DoStr2Hex(m_strSendData,data);
@@ -617,18 +615,23 @@ LONG CMyCommView::OnCommunication(WPARAM ch, LPARAM port)
 {
     if (m_IsViewReceiveData)
     {
-        if (m_ctrlReceiveHex.GetCheck())
-        {
-            CString str;
+        CString str;
+        if (m_ctrlReceiveHex.GetCheck()) {
             str.Format("%02X ",ch);
-            m_EditLogger.AddText(str);
+            //m_EditLogger.AddText(str);
         } else {
-            CString str;
             str.Format("%c",ch);
-            m_EditLogger.AddText(str);
+            //m_EditLogger.AddText(str);
         }
+
+        CEdit *edit = (CEdit*)GetDlgItem(IDC_EDRECDATA);
+        int nLength=edit->SendMessage(WM_GETTEXTLENGTH);  
+        edit->SetSel(nLength, nLength);  
+        edit->ReplaceSel(str);
+
         UpdateData(FALSE);
     }
+
     GetDocument()->m_RXCount++;
     CMyCommApp * myApp = (CMyCommApp *)AfxGetApp();
     CString str;

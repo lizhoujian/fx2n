@@ -1238,7 +1238,7 @@ void CMyCommView::OnBnClickedBtfxtest()
     currView = this;
     currDoc = GetDocument();
     uart_set_tx_cb(fxSend);
-    
+
     fx_enquiry();
     appendSentLR();
     fx_force_on(REG_Y, 100);

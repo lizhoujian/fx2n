@@ -215,6 +215,7 @@ static bool wait_recv_done(u16 miliseconds)
         miliseconds += portTICK_RATE_MS;
     }
 
+    Sleep(100);
     xQueueReceive(uart_queue_recv, (void *)&e, (portTickType)(miliseconds / portTICK_RATE_MS));
     if (e.event = UART_EVENT_DONE) {
         return true;
@@ -452,8 +453,7 @@ bool fx_enquiry(void)
     ret = wait_response(WAIT_RECV_TIMEOUT) && is_ack();
     free_response();
 
-    return true;
-    //return ret;
+    return ret;
 }
 
 static bool fx_force_onoff(u8 addr_type, u16 addr, u8 cmd)

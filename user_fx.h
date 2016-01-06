@@ -28,26 +28,53 @@ enum {
     REG_S,
     REG_C,
     REG_X,
-    REG_Y
+    REG_Y,
+    REG_MS,
+    REG_YP,
+    REG_TO,
+    REG_MP,
+    REG_CO,
+    REG_TR,
+    REG_CR,
+    REG_TV,
+    REG_CV16,
+    REG_CV32,
+    REG_DS
 };
 
 // register bytes address
-#define REG_D_BASE_ADDRESS 0x1000
-#define REG_M_BASE_ADDRESS 0x100
-#define REG_T_BASE_ADDRESS 0x0c0
 #define REG_S_BASE_ADDRESS 0x0
-#define REG_C_BASE_ADDRESS 0x1c0
 #define REG_X_BASE_ADDRESS 0x80
 #define REG_Y_BASE_ADDRESS 0x0a0
+#define REG_T_BASE_ADDRESS 0x0c0
+#define REG_M_BASE_ADDRESS 0x100
+#define REG_C_BASE_ADDRESS 0x1c0
+#define REG_MS_BASE_ADDRESS 0x1e0   /* M special register(8000 - 8255) */
+#define REG_D_BASE_ADDRESS 0x1000   /* D 16bits value register */
+
+#define REG_YP_BASE_ADDRESS 0x2a0   /* P PLS/PLF register */
+#define REG_TO_BASE_ADDRESS 0x2c0   /* T OUT register */
+#define REG_MP_BASE_ADDRESS 0x300   /* M PLS/PLF register */
+#define REG_CO_BASE_ADDRESS 0x3c0   /* C OUT register */
+
+#define REG_TR_BASE_ADDRESS 0x4c0   /* T RST register */
+#define REG_CR_BASE_ADDRESS 0x5c0   /* C RST register */
+
+#define REG_TV16_BASE_ADDRESS 0x800   /* T 16bits value register */
+#define REG_CV16_BASE_ADDRESS 0xa00   /* C 16bits value register */
+#define REG_CV32_BASE_ADDRESS 0xc00   /* C 32bits value register */
+
+#define REG_DS_BASE_ADDRESS 0xe00   /* D special 16bits value register(8000 - 8255) */
 
 // register bit address
-#define REG_D_BIT_BASE_ADDRESS 0x0
-#define REG_M_BIT_BASE_ADDRESS 0x800
-#define REG_T_BIT_BASE_ADDRESS 0x0c0
 #define REG_S_BIT_BASE_ADDRESS 0x0
-#define REG_C_BIT_BASE_ADDRESS 0x1c0
-#define REG_X_BIT_BASE_ADDRESS 0x80
-#define REG_Y_BIT_BASE_ADDRESS 0x100
+#define REG_X_BIT_BASE_ADDRESS 0x400
+#define REG_Y_BIT_BASE_ADDRESS 0x500
+#define REG_T_BIT_BASE_ADDRESS 0x600
+#define REG_M_BIT_BASE_ADDRESS 0x800
+#define REG_C_BIT_BASE_ADDRESS 0xe00
+#define REG_MS_BIT_BASE_ADDRESS 0xf00
+#define REG_D_BIT_BASE_ADDRESS 0x0
 
 #define MAX_DATA_ONETIME 32
 

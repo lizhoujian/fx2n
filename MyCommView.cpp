@@ -1231,30 +1231,73 @@ static void fxSend(unsigned char c)
     appendSentHex(&c, 1);
 }
 
-#define DATA_LEN 20
-#define OPERATE_LEN 4
-void CMyCommView::OnBnClickedBtfxtest()
+static void write_read_test1(void)
 {
+#define DATA_LEN 2
     int i;
-    unsigned char bytes[DATA_LEN] = {0x5a, 0xa5};
+    unsigned char bytes[20] = {0x35, 0x84};
 
-    currView = this;
-    currDoc = GetDocument();
-    uart_set_tx_cb(fxSend);
-
-    fx_enquiry();
+    fx_write(REG_Y, 0, bytes, DATA_LEN);
     appendSentLR();
-    fx_force_on(REG_Y, 0);
-    appendSentLR();
-    fx_force_off(REG_Y, 0);
-    appendSentLR();
-    fx_write(REG_D, 123, bytes, OPERATE_LEN);
-    appendSentLR();
-    fx_read(REG_D, 123, bytes, OPERATE_LEN);
+    fx_read(REG_Y, 0, bytes, DATA_LEN);
     TRACE("read bytes is ");
-    for (i = 0; i < OPERATE_LEN; i++) {
+    for (i = 0; i < DATA_LEN; i++) {
         TRACE("%02x ", bytes[i]);
     }
     TRACE("\n");
     appendSentLR();
+}
+
+static void write_read_test2(void)
+{
+#define DATA_LEN 4
+    int i;
+    unsigned char bytes[20] = {0x34, 0x12, 0xcd, 0xab};
+
+    fx_write(REG_D, 123, bytes, DATA_LEN);
+    appendSentLR();
+    fx_read(REG_D, 123, bytes, DATA_LEN);
+    TRACE("read bytes is ");
+    for (i = 0; i < DATA_LEN; i++) {
+        TRACE("%02x ", bytes[i]);
+    }
+    TRACE("\n");
+    appendSentLR();
+}
+
+static void test_enquiry(void)
+{
+    fx_enquiry();
+    appendSentLR();
+}
+
+static void test_onoff1(void)
+{
+    fx_force_on(REG_Y, 0);
+    appendSentLR();
+    fx_force_off(REG_Y, 0);
+    appendSentLR();
+}
+
+static void test_onoff2(void)
+{
+    fx_force_on(REG_Y, 19); // Y23 - 8½øÖÆ
+    appendSentLR();
+    fx_force_off(REG_Y, 19);
+    appendSentLR();
+}
+
+void CMyCommView::OnBnClickedBtfxtest()
+{
+    currView = this;
+    currDoc = GetDocument();
+    uart_set_tx_cb(fxSend);
+    
+    test_enquiry();
+
+    test_onoff1();
+    test_onoff2();
+
+    write_read_test1();
+    write_read_test2();
 }

@@ -14,6 +14,10 @@
 #endif
 
 #ifdef __WINDOWS__
+
+// test response for windows
+#define __WINDOWS_TEST__
+
 typedef void * xQueueHandle;
 typedef void * xSemaphoreHandle;
 typedef unsigned int portTickType;
@@ -80,7 +84,7 @@ typedef struct register_t
     u8 type; /* register type */
     u32 byte_base_addr; /* base address for current */
     u32 bit_base_addr; /* base address for current */
-    u32 (*addr)(void *r, u16 offset, bool bit_operate); /* calc address */
+    u32 (*addr)(void *r, u16 offset, bool bit); /* calc address */
     u8 addr_len; /* bytes of address */
 } register_t;
 
@@ -114,7 +118,7 @@ static void post_event(u8 ev)
 
 static void parse_buf(uart_buf_t *p, u16 len)
 {
-    if (len == p->len || p->data[0] == NACK) {
+    if (len == p->len || p->data[0] == NAK) {
         post_event(UART_EVENT_DONE);
     }
 }
@@ -143,7 +147,7 @@ static void uart_send(u8 *data, u16 len)
     }
 }
 
-u8 fx_check_sum(u8 *in, u16 inLen)
+u8 check_sum(u8 *in, u16 inLen)
 {
     int i, sum;
 
@@ -155,16 +159,16 @@ u8 fx_check_sum(u8 *in, u16 inLen)
     return sum & 0xff;
 }
 
-static u8 to_hex_byte(u8 *in)
+static u8 to_hex(u8 *in)
 {
     return ((TO_HEX(in[0]) << 4) & 0xf0) | ((TO_HEX(in[1]) & 0xf));
 }
 
-static void fx_ascii_to_hex(u8 *in, u8 *out, u16 inLen)
+static void ascii_to_hex(u8 *in, u8 *out, u16 inLen)
 {
     int i;
     for (i = 0; i < inLen; i += 2) {
-        out[i/2] = to_hex_byte(&in[i]);
+        out[i/2] = to_hex(&in[i]);
     }
 }
 
@@ -299,10 +303,10 @@ static bool parse_response_data(u8 *out, u16 len)
     xSemaphoreTake(uart_queue_recv, portMAX_DELAY);
 
     if ((p->index == p->len) && p->data[0] == STX && (p->index > 3 && p->data[p->index - 1 - 2] == ETX)) {
-        sum = fx_check_sum(&p->data[0], p->len - 3);
-        recv_sum = (u8)to_hex_byte(&p->data[p->index - 1 - 1]);
+        sum = check_sum(&p->data[1], p->len - 3); /* - STX - CHECKSUM */
+        recv_sum = to_hex(&p->data[p->index - 1 - 1]);
         if (sum == recv_sum) {
-            fx_ascii_to_hex(&p->data[0], out, p->len - 4);
+            ascii_to_hex(&p->data[1], out, p->len - 4);
             ret = true;
         } else {
             TRACE("response data check sum error.\n");
@@ -338,22 +342,25 @@ void fx_init(void)
     }
 }
 
-static u32 calc_address(void *r, u16 offset, bool bit_operate)
+static u32 get_base(void *r, bool bit)
 {
     register_t *t = (register_t*)r;
-    return (bit_operate ? t->bit_base_addr : t->byte_base_addr) + offset;
+    return (bit ? t->bit_base_addr : t->byte_base_addr);
 }
 
-static u32 calc_address2(void *r, u16 offset, bool bit_operate)
+static u32 calc_address(void *r, u16 offset, bool bit)
 {
-    register_t *t = (register_t*)r;
-    return (bit_operate ? t->bit_base_addr : t->byte_base_addr)  * 2 + offset;
+     return get_base(r, bit) + offset;
 }
 
-static u32 calc_address3(void *r, u16 offset, bool bit_operate)
+static u32 calc_address2(void *r, u16 offset, bool bit)
 {
-    register_t *t = (register_t*)r;
-    return (bit_operate ? t->bit_base_addr : t->byte_base_addr)  * 3 + offset;
+    return get_base(r, bit) + offset * 2;
+}
+
+static u32 calc_address3(void *r, u16 offset, bool bit)
+{
+    return get_base(r, bit) + offset * 3;
 }
 
 static u32 swap_address(void *r, u32 addr)
@@ -402,50 +409,55 @@ static bool is_little_endian(void)
     return *c == 0x34;
 }
 
-static u16 create_request(register_t *r, u8 cmd, u16 addr, u8 *data, u16 len, u8 **req)
+static u16 unit_addr(register_t *r, u8 cmd, u16 addr)
 {
-    u8 *buf;
-    u16 buf_len, len_size;
-    u16 raddr;
-    u8 sum;
-
+    u16 raddr = 0;
     if (cmd == ACTION_FORCE_ON || cmd == ACTION_FORCE_OFF) {
         raddr = r->addr(r, addr, true);
         if (!is_little_endian()) {
             raddr = SWAP_BYTE(raddr);
         }
-        len_size = 0;
     } else if (cmd == ACTION_READ || cmd == ACTION_WRITE) {
         raddr = r->addr(r, addr, false);
         if (is_little_endian()) {
             raddr = SWAP_BYTE(raddr);
         }
-        len_size = 2; /* 2 BYTES */
     }
+    return raddr;
+}
 
-    buf_len = 1 + 1 + 4;
-    buf_len += len_size;
-    buf_len += (len * 2);
-    buf_len += 1 + 2;
+static u16 create_request(register_t *r, u8 cmd, u16 addr, u8 *data, u16 len, u8 **req)
+{
+    u8 *buf;
+    u16 rlen;
+    u16 raddr;
+    u8 sum;
 
-    buf = (u8*)malloc(buf_len);
+    raddr = unit_addr(r, cmd, addr);
+
+    rlen = 1 + 1 + 4;
+    rlen += (len > 0 ? 2 : 0);
+    rlen += (data != NULL ? len * 2 : 0);
+    rlen += 1 + 2;
+
+    buf = (u8*)malloc(rlen);
     if (buf) {
-        memset(buf, 0, buf_len);
+        memset(buf, 0, rlen);
         buf[0] = STX;
         buf[1] = TO_ASCII(cmd);
         hex_to_ascii((u8*)&raddr, &buf[2], 2); /* 4 bytes */
-        if (len_size > 0) {
-            to_ascii((u8)len_size, &buf[6]); /* 2 bytes */
-        }
         if (len > 0) {
+            to_ascii((u8)len, &buf[6]); /* 2 bytes */
+        }
+        if (data != NULL) {
             hex_to_ascii(data, &buf[8], len); /* (2 * len) bytes */
         }
-        buf[buf_len - 1 - 2] = ETX;
-        sum = fx_check_sum(&buf[1], buf_len - 3 /* - STX - CHECKSUM */);
-        to_ascii(sum, &buf[buf_len - 1 - 1]);
+        buf[rlen - 1 - 2] = ETX;
+        sum = check_sum(&buf[1], rlen - 3); /* - STX - CHECKSUM */
+        to_ascii(sum, &buf[rlen - 1 - 1]);
 
         *req = buf;
-        return buf_len;
+        return rlen;
     }
 
     return 0;
@@ -463,7 +475,7 @@ static void free_request(u8 *data)
     }
 }
 
-#ifdef __WINDOWS__
+#ifdef __WINDOWS_TEST__
 static UINT thread_ack(LPVOID param)
 {
     uart_on_recv_char(ACK);
@@ -475,7 +487,7 @@ static UINT thread_read(LPVOID param)
     u8 *buf, sum;
     int i, r;
 
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
 
     rlen = 1 + len * 2 + 1 + 2;
     buf = (u8*)malloc(rlen);
@@ -483,11 +495,14 @@ static UINT thread_read(LPVOID param)
         memset(buf, 0, rlen);
         buf[0] = STX;
         for (i = 0; i < len * 2; i++) {
-            r = rand() % 40;
-            buf[i + 1] = (u8)r;
+            r = -1;
+            while (!(r >= 0 && r <= 15)) {
+                r = rand() % 16;
+            }
+            buf[i + 1] = TO_ASCII((u8)r);
         }
         buf[rlen - 1 - 2] = ETX;
-        sum = fx_check_sum(&buf[0], rlen - 3 /* - STX - CHECKSUM */);
+        sum = check_sum(&buf[1], rlen - 3); /* - STX - CHECKSUM */
         to_ascii(sum, &buf[rlen - 1 - 1]);
 
         for (i = 0; i < rlen; i++) {
@@ -507,7 +522,7 @@ bool fx_enquiry(void)
 
     create_response(cmd, 0);
     uart_send(&cmd, 1);
-#ifdef __WINDOWS__
+#ifdef __WINDOWS_TEST__
     AfxBeginThread(thread_ack, NULL);
 #endif
     ret = wait_response(WAIT_RECV_TIMEOUT) && is_ack();
@@ -529,7 +544,7 @@ static bool fx_force_onoff(u8 addr_type, u16 addr, u8 cmd)
             if ((rlen = create_request(r, cmd, addr, NULL, 0, &req)) > 0) {
                 create_response(cmd, 0);
                 send_request(req, rlen);
-#ifdef __WINDOWS__
+#ifdef __WINDOWS_TEST__
                 AfxBeginThread(thread_ack, NULL);
 #endif
                 free_request(req);
@@ -562,10 +577,10 @@ bool fx_read(u8 addr_type, u16 addr, u8 *out, u16 len)
     if (fx_enquiry()) {
         r = find_registers(addr_type);
         if (r) {
-            if ((rlen = create_request(r, ACTION_READ, addr, NULL, 0, &req)) > 0) {
+            if ((rlen = create_request(r, ACTION_READ, addr, NULL, len, &req)) > 0) {
                 create_response(ACTION_READ, len);
                 send_request(req, rlen);
-#ifdef __WINDOWS__
+#ifdef __WINDOWS_TEST__
                 AfxBeginThread(thread_read, (LPVOID)len);
 #endif
                 free_request(req);
@@ -594,7 +609,7 @@ bool fx_write(u8 addr_type, u16 addr, u8 *data, u16 len)
             if ((rlen = create_request(r, ACTION_WRITE, addr, data, len, &req)) > 0) {
                 create_response(ACTION_WRITE, 0);
                 send_request(req, rlen);
-#ifdef __WINDOWS__
+#ifdef __WINDOWS_TEST__
                 AfxBeginThread(thread_ack, NULL);
 #endif
                 free_request(req);

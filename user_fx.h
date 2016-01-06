@@ -13,7 +13,7 @@ void uart_on_recv_char(unsigned char c);
 #define ETX 0x3
 #define ENQ 0x5
 #define ACK 0x6
-#define NACK 0x0f
+#define NAK 0x15
 
 #define ACTION_READ      0x0
 #define ACTION_WRITE     0x1
@@ -48,6 +48,8 @@ enum {
 #define REG_C_BIT_BASE_ADDRESS 0x1c0
 #define REG_X_BIT_BASE_ADDRESS 0x80
 #define REG_Y_BIT_BASE_ADDRESS 0x100
+
+#define MAX_DATA_ONETIME 32
 
 bool fx_enquiry(void);
 bool fx_force_on(u8 addr_type, u16 addr);

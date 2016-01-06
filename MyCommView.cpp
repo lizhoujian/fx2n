@@ -1231,9 +1231,12 @@ static void fxSend(unsigned char c)
     appendSentHex(&c, 1);
 }
 
+#define DATA_LEN 20
+#define OPERATE_LEN 4
 void CMyCommView::OnBnClickedBtfxtest()
 {
-    unsigned char bytes[2] = {0x5a, 0xa5};
+    int i;
+    unsigned char bytes[DATA_LEN] = {0x5a, 0xa5};
 
     currView = this;
     currDoc = GetDocument();
@@ -1241,13 +1244,17 @@ void CMyCommView::OnBnClickedBtfxtest()
 
     fx_enquiry();
     appendSentLR();
-    fx_force_on(REG_Y, 100);
+    fx_force_on(REG_Y, 0);
     appendSentLR();
-    fx_force_off(REG_Y, 100);
+    fx_force_off(REG_Y, 0);
     appendSentLR();
-    fx_write(REG_Y, 100, bytes, 2);
+    fx_write(REG_D, 123, bytes, OPERATE_LEN);
     appendSentLR();
-    fx_read(REG_Y, 100, bytes, 2);
-    TRACE("read bytes is %02x %02x\n", bytes[0], bytes[1]);
+    fx_read(REG_D, 123, bytes, OPERATE_LEN);
+    TRACE("read bytes is ");
+    for (i = 0; i < OPERATE_LEN; i++) {
+        TRACE("%02x ", bytes[i]);
+    }
+    TRACE("\n");
     appendSentLR();
 }
